@@ -47,6 +47,10 @@ def next_pl(a):
 		network.send("e")
 	surface.allow_nextpl(False)
 	surface.set_msg(memo.get_plstr()+"\nhas to do the turn!")
+
+	# Make sure that the grave of the other players is grey      
+	surface.restrict_to_player(memo.act_pl.nr)
+
 	memo.act_pl.set_threats(0)
 	if memo.act_pl.has_tripleroll():
 		memo.rolls = 3
@@ -351,6 +355,7 @@ class memory():
 			self.rolls = 1
 		self.roll_log = []
 		self.dice = 0
+
 	def newgame(self):
 		self._plcnt = -1#dont worry will immediately be increased
 		self.nextplayer()

@@ -76,19 +76,19 @@ class brett(gtk.Window):
 			self.buttons[1][i].connect("clicked",self.click, 1,i)
 
 		#attach boxes to tableslots
-		self.tab.attach(self.buttons[0][0],8,9,1,2)#spawns of player red
+		self.tab.attach(self.buttons[0][0],8,9,1,2)#grave of player red
 		self.tab.attach(self.buttons[0][1],9,10,1,2)
 		self.tab.attach(self.buttons[0][2],8,9,2,3)
 		self.tab.attach(self.buttons[0][3],9,10,2,3)
-		self.tab.attach(self.buttons[0][4],8,9,8,9)#spawns of player blue
+		self.tab.attach(self.buttons[0][4],8,9,8,9)#grave of player blue
 		self.tab.attach(self.buttons[0][5],9,10,8,9)
 		self.tab.attach(self.buttons[0][6],8,9,9,10)
 		self.tab.attach(self.buttons[0][7],9,10,9,10)
-		self.tab.attach(self.buttons[0][8],1,2,8,9)#spawns of player yellow
+		self.tab.attach(self.buttons[0][8],1,2,8,9)#grave of player yellow
 		self.tab.attach(self.buttons[0][9],2,3,8,9)
 		self.tab.attach(self.buttons[0][10],1,2,9,10)
 		self.tab.attach(self.buttons[0][11],2,3,9,10)
-		self.tab.attach(self.buttons[0][12],1,2,1,2)#spawns of player green
+		self.tab.attach(self.buttons[0][12],1,2,1,2)#grave of player green
 		self.tab.attach(self.buttons[0][13],2,3,1,2)
 		self.tab.attach(self.buttons[0][14],1,2,2,3)
 		self.tab.attach(self.buttons[0][15],2,3,2,3)
@@ -828,6 +828,17 @@ def get_visi():
 	return memo.board_visible
 def pre_render(p):
 	board.pre_render(p)
+def restrict_to_player(player): # Makes only the savepoints of the current player usable. The rest is grey.
+    
+    assert(type(player) == int)
+    assert(0 <= player <= 3)
+    for plidx in range(4):
+        if(plidx == player):
+            setit = 1
+        else:
+            setit = 0
+        for butIdx in range(4):
+            board.buttons[0][butIdx + 4*plidx].set_sensitive(setit)
 
 class memory:
 	def __init__(self):
