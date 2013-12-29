@@ -397,7 +397,10 @@ def game_start(asd,gamers):
 			
 		else:
 			game.players[i] = 0
-		
+	
+	# Make sure that the grave of the other players is grey      
+	surface.restrict_to_player(game.memo.act_pl.nr)
+
 	start_window.optwindow.hide()
 	start_window.joinwindow.hide()
 	start_window.hide()
